@@ -1,41 +1,25 @@
-/* Write a Program detab,which replaces tabs in the input with a proper 
-	number of blanks to spaces */
-
-#include<stdio.h>
-#define TABINC 8
-
-int main(void)
+#include <stdio.h>
+int main()
 {
-	int nb,pos,c;
-
-	nb = 0;
-	pos = 1;
-
+	char c;
+	int pos=0,nt;
 	while((c=getchar())!=EOF)
 	{
-		if( c == '\t')
-		{
-			nb = TABINC - (( pos - 1) % TABINC);
-
-			while( nb > 0)
-			{
-				putchar('#');
-				++pos;
-				--nb;
-			}
-		}
-		else if( c == '\n')
+		if(c!='\t')
 		{
 			putchar(c);
-			pos = 1;
+			pos++;
 		}
-		else
+		if(c=='\t')
 		{
-			putchar(c);
-			++pos;
+			if(pos<=8)
+				nt=8-pos;
+			else
+				nt=(8-(pos%8));
+			pos=0;
+			for(;nt>0;nt--)
+				printf("#");
 		}
 	}
-
 	return 0;
 }
-
